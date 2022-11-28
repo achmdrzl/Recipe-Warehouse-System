@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DataRecipeController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\HomepageController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +21,40 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// user controller
+Route::group(['middleware' => ['role:user', 'auth']], function () {
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Dashboard User 
+    Route::get('/index', HomepageController::class . '@index')->name('homepage');
+
+    Route::get('/aboutme', function(){
+        return view('user.aboutme', ['title' => 'About Me']);
+    });
+
+    Route::get('/contact', function(){
+        return view('user.contact', ['title' => 'Contact']);
+    });
+
+    Route::get('/recipe', function(){
+        return view('user.recipe', ['title' => 'Home']);
+    });
+
 });
 
-require __DIR__.'/auth.php';
+// admin controller
+Route::group(['middleware' => ['auth', 'role:user|admin']], function () {
+
+    // Dashboard Admin
+    Route::get('/dashboard', DashboardController::class . '@index')->name('home');
+
+    // Users Data
+    Route::resource('users', UserController::class);
+
+    // Recipes Data
+    Route::resource('recipes', DataRecipeController::class);
+});
+
+require __DIR__ . '/auth.php';
