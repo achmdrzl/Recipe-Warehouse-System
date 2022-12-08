@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DataIngredientController;
 use App\Http\Controllers\Admin\DataRecipeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\HomepageController;
+use App\Http\Controllers\User\SearchController;
+use App\Models\Ingredient;
+use App\Models\Recipe;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -29,18 +33,18 @@ Route::group(['middleware' => ['role:user', 'auth']], function () {
 
     // Dashboard User 
     Route::get('/index', HomepageController::class . '@index')->name('homepage');
+    Route::resource('homepage', HomepageController::class);
 
-    Route::get('/aboutme', function(){
-        return view('user.aboutme', ['title' => 'About Me']);
-    });
+    Route::get('/aboutme', function () {
+        $recipes = Recipe::paginate(6);
+        return view('user.aboutme', ['title' => 'About Me', 'recipes' => $recipes]);
+    })->name('aboutme');
 
-    Route::get('/contact', function(){
+    Route::get('/contact', function () {
         return view('user.contact', ['title' => 'Contact']);
-    });
+    })->name('contactme');
 
-    Route::get('/recipe', function(){
-        return view('user.recipe', ['title' => 'Home']);
-    });
+    Route::post('/search', SearchController::class . '@search')->name('search.recipe');
 
 });
 
@@ -55,6 +59,16 @@ Route::group(['middleware' => ['auth', 'role:user|admin']], function () {
 
     // Recipes Data
     Route::resource('recipes', DataRecipeController::class);
+    Route::post('recipes/images', DataRecipeController::class . '@storeImg')->name('recipes.storeImg');
+
+    // Ingredient Data
+    Route::resource('ingredient', DataIngredientController::class);
+
+});
+
+
+Route::get('/cek', function () {
+    return Recipe::with('instruction')->get();
 });
 
 require __DIR__ . '/auth.php';

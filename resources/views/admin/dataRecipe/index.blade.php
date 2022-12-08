@@ -11,57 +11,59 @@
             </div>
         @endif
         <div class="page-header">
-            <h3 class="page-title">Data Pengguna</h3>
-            {{-- <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"> Basic tables </li>
-                </ol>
-            </nav> --}}
+            <h3 class="page-title">Data Resep Makanan</h3>
             <div class="header-right d-flex flex-wrap mt-md-2 mt-lg-0">
-                <a type="button" href="{{ route('users.create') }}" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
-                    <i class="mdi mdi-plus-circle"></i> Tambah Pengguna </a>
+                <a type="button" href="{{ route('recipes.create') }}" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                    <i class="mdi mdi-plus-circle"></i> Tambah Resep </a>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Data Pengguna</h4>
-                        <p class="card-description">Keseluruhan Data Pengguna</p>
+                        <h4 class="card-title">Data Resep Makanan</h4>
+                        <p class="card-description">Keseluruhan Data Resep Makanan</p>
                         <div class="table-responsive">
                             <table class="table table-hover" id="myTable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
+                                        <th>Nama Resep</th>
+                                        <th>Deskripsi</th>
+                                        <th>Kategori Makanan</th>
+                                        <th>Image</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $value)
+                                    @foreach ($recipes as $value)
                                         <tr>
                                             <input type="hidden" class="delete_id" value="{{ $value->id }}">
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $value->name }}</td>
-                                            <td>{{ $value->email }}</td>
+                                            <td><label class="badge badge-dark">{{ $loop->iteration }}</label></td>
+                                            <td>{{ $value->nameFood }}</td>
+                                            <td>{{ substr($value->desc, 0,30) }} ...</td>
+                                            <td><label class="badge badge-danger">{{ ucfirst($value->kategori) }}</label></td>
                                             <td>
-                                                @if (!empty($value->getRoleNames()))
-                                                    @foreach ($value->getRoleNames() as $v)
-                                                        <div class="badge badge-info" style="font-size: 13px">{{ Str::ucfirst($v) }}</div>
-                                                    @endforeach
+                                                @if ($value->photo)
+                                                    <a href="{{ $value->photo->getUrl() }}" target="_blank">
+                                                        <img src="{{ $value->photo->getUrl() }}" class="img-lg"
+                                                            width="40px" height="40px">
+                                                    </a>
+                                                @else
+                                                    <span class="badge badge-warning">Tidak Ada Gambar</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('users.edit', $value->id) }}"
+                                                <a href="{{ route('recipes.show', $value->id) }}"
+                                                    class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
+                                                <a href="{{ route('recipes.edit', $value->id) }}"
                                                     class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
-                                                <form action="{{ route('users.destroy', $value->id) }}" method="POST"
+                                                <form action="{{ route('recipes.destroy', $value->id) }}" method="POST"
                                                     class="d-inline">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-danger btn-md btndelete"><i class="fa fa-trash-o"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-md btndelete"><i class="ti-trash"></i>
+                                                        <i class="fa fa-trash-o"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -107,7 +109,7 @@
                             };
                             $.ajax({
                                 type: "DELETE",
-                                url: 'users/' + deleteid,
+                                url: 'recipes/' + deleteid,
                                 data: data,
                                 success: function(response) {
                                     swal(response.status, {
@@ -119,7 +121,7 @@
                                 }
                             });
                         } else {
-                            swal("Cancel!", "Undelete Successfully!", "error");
+                            swal("Batal!", "Proses Hapus di Batalkan!", "error");
 
                         }
                     });

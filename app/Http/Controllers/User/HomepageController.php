@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Detail_recipe;
+use App\Models\Ingredient;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
@@ -14,7 +17,8 @@ class HomepageController extends Controller
      */
     public function index()
     {
-        return view('user.index', ['title' => 'Home']);
+        $recipes = Recipe::paginate(6);
+        return view('user.index', ['title' => 'Home', 'recipes' => $recipes]);
     }
 
     /**
@@ -46,7 +50,16 @@ class HomepageController extends Controller
      */
     public function show($id)
     {
-        //
+        $recipe = Recipe::with(['detailRecipe.ingredient'])->where('id', $id)->first();
+
+        $ingredient = Detail_recipe::where('ingredient_id', $id)->get();
+        $totalIngredient = $ingredient->count();
+
+        return view('user.recipe', [
+            'title' => 'Detail Resep',
+            'recipe' => $recipe,
+            'total' => $totalIngredient
+        ]);
     }
 
     /**
@@ -82,4 +95,5 @@ class HomepageController extends Controller
     {
         //
     }
+
 }

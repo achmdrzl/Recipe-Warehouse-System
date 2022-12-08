@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-header">
-        <h3 class="page-title">Tambah Pengguna</h3>
+        <h3 class="page-title">Ubah Data Pengguna</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Data Pengguna</a></li>
@@ -26,7 +26,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Menambahkan Data Pengguna Baru</h4>
+                    <h4 class="card-title">Mengubah Data Pengguna</h4>
                     <p class="card-description">Harap Masukkan Seluruh Inputan Dengan Benar!</p>
                     <form class="forms-sample" action="{{ route('users.update', $user->id) }}" method="POST">
                         @csrf

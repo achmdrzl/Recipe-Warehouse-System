@@ -23,7 +23,9 @@
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.png') }}" />
     {{-- Datatables --}}
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @stack('style-alt')
 </head>
 
@@ -49,7 +51,8 @@
                                         <img src="{{ asset('admin/assets/images/faces/face1.jpg') }}" alt="image" />
                                     </div>
                                     <div class="nav-profile-text">
-                                        <p class="text-black font-weight-semibold m-0"> {{ ucfirst(Auth::user()->name) }} </p>
+                                        <p class="text-black font-weight-semibold m-0">
+                                            {{ ucfirst(Auth::user()->name) }} </p>
                                         <span class="font-13 online-color">online <i
                                                 class="mdi mdi-chevron-down"></i></span>
                                     </div>
@@ -83,10 +86,22 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('recipes.index') }}">
-                                <i class="mdi mdi-clipboard-text menu-icon"></i>
-                                <span class="menu-title">Data Resep</span>
+                            <a href="#" class="nav-link">
+                                <i class="mdi mdi-monitor-dashboard menu-icon"></i>
+                                <span class="menu-title">Data Master</span>
+                                <i class="menu-arrow"></i>
                             </a>
+                            <div class="submenu">
+                                <ul class="submenu-item">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('recipes.index') }}">Data Resep</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('ingredient.index') }}">Data Bahan
+                                            Makanan</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users.index') }}">
@@ -126,7 +141,7 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="{{ asset('admin/assets/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/vendors/chart.js') }}/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin/assets/vendors/chart.js') }}/Chart.min.js') }}"></script> --}}
     <script src="{{ asset('admin/assets/vendors/flot/jquery.flot.js') }}"></script>
     <script src="{{ asset('admin/assets/vendors/flot/jquery.flot.resize.js') }}"></script>
     <script src="{{ asset('admin/assets/vendors/flot/jquery.flot.categories.js') }}"></script>
