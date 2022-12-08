@@ -58,7 +58,7 @@ class UserController extends Controller
         $user->assignRole($request->input('role'));
 
         return redirect()->route('users.index')->with([
-            'message' => 'User Created Successfully',
+            'message' => 'Penambahan Data Pengguna Berhasil!',
             'type' => 'success',
         ]);
     }
@@ -124,7 +124,7 @@ class UserController extends Controller
         $user->assignRole($request->input('role'));
 
         return redirect()->route('users.index')->with([
-            'message' => 'User Updated Successfully',
+            'message' => 'Ubah Data Pengguna Berhasil!',
             'type' => 'success',
         ]);
     }
@@ -139,6 +139,6 @@ class UserController extends Controller
     {
         User::find($id)->delete();
 
-        return response()->json(['status' => 'Pengguna Berhasil di Hapus!']);
+        return response()->json(['status' => 'Data Pengguna Berhasil di Hapus!']);
     }
 }

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('user/css/nice-select.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('user/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('user/css/style.css') }}" type="text/css">
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
 </head>
 
 <body>
@@ -30,14 +31,14 @@
     <header class="header-section-other">
         <div class="container">
             <div class="logo">
-                <a href="./index"><img src="{{ asset('user/img/little-logo.png') }}" alt=""></a>
+                <a href="{{ route('homepage') }}"><img src="{{ asset('user/img/little-logo.png') }}" alt=""></a>
             </div>
             <div class="nav-menu">
                 <nav class="main-menu mobile-menu">
                     <ul>
-                        <li class="{{ $title == 'Home' ? 'active' : '' }}"><a href="/index">Home</a></li>
-                        <li class="{{ $title == 'About Me' ? 'active' : '' }}"><a href="/aboutme">About Me</a></li>
-                        <li class="{{ $title == 'Contact' ? 'active' : '' }}"><a href="/contact">Contact</a></li>
+                        <li class="{{ $title == 'Home' ? 'active' : '' }}"><a href="{{ route('homepage') }}">Home</a></li>
+                        <li class="{{ $title == 'About Me' ? 'active' : '' }}"><a href="{{ route('aboutme') }}">About Me</a></li>
+                        <li class="{{ $title == 'Contact' ? 'active' : '' }}"><a href="{{ route('contactme') }}">Contact</a></li>
                     </ul>
                 </nav>
                 <div>
@@ -63,9 +64,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="filter-table">
-                        <form action="#" class="filter-search">
-                            <input type="text"
-                                placeholder="Masukkan Bahan Makanan Anda (Ayam, Bawang Bombai, Wortel)">
+                        <form action="{{ route('search.recipe') }}" method="POST" class="filter-search">
+                            @csrf
+                            <input name="search" type="text" placeholder="Masukkan Bahan Makanan Anda (Ayam, Bawang Bombai, Wortel)" value="{{ old('search') }}">
                             <button type="submit">Search</button>
                         </form>
                     </div>
@@ -84,7 +85,7 @@
                 <div class="col-lg-5">
                     <div class="fs-left">
                         <div class="logo">
-                            <a href="./index.html">
+                            <a href="{{ route('homepage') }}">
                                 <img src="{{ asset('user/img/footer-logo.png') }}" alt="">
                             </a>
                         </div>
@@ -96,8 +97,8 @@
                 <div class="col-lg-6 offset-lg-1">
                     <form action="#" class="subscribe-form">
                         <h3>Subscribe to our newsletter</h3>
-                        <input type="email" placeholder="Your e-mail">
-                        <button type="submit">Subscribe</button>
+                        {{-- <input type="email" placeholder="Your e-mail"> --}}
+                        {{-- <button type="submit">Subscribe</button> --}}
                     </form>
                     <div class="social-links">
                         <a href="#"><i class="fa fa-instagram"></i><span>Instagram</span></a>
@@ -115,9 +116,7 @@
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i
-                            class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a>
+                        </script> All rights reserved | 2022
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                 </div>

@@ -1,140 +1,74 @@
 @extends('user.layout.main')
 
 @section('content')
-<!-- About Me Section Begin -->
-<section class="about-me spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="about-left">
-                    <img src="img/about-me.jpg" alt="">
-                    <div class="about-title">
-                        <span>16 January 2019</span>
-                        <h2>I’m Maria Smith, <br />a mother & a food blogger</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet. Donec in sodales dui, a
-                            blandit nunc. Pellentesque id eros venenatis, sollicitudin neque sodales, vehicula nibh.
-                            Nam massa odio, porttitor vitae efficitur non, ultricies volutpat tellus. Cras egestas
-                            in lacus a finibus. Suspendisse sed urna at elit condimentum viverra. Suspendisse non
-                            lobortis nisi. Maecenas accumsan quam quis porta laoreet. Aliquam felis odio, aliquet
-                            fermentum semper at, porttitor ac mi. Duis vel condimentum risus. Phasellus eu dolor vel
-                            neque commodo accumsan eget et enim. Pellentesque non elit sed risus tincidunt aliquam
-                            eu eget metus.</p>
-                        <p>Donec sit amet enim tortor. Sed egestas nulla nibh, vitae porta velit sagittis eget.
-                            Donec vitae tellus semper, cursus sem id, iaculis purus. Aenean ligula risus, maximus
-                            tristique eros vel, auctor ornare tortor. Aliquam vel augue sapien. Duis non auctor
-                            ante, ac vestibulum tortor. Etiam quis dolor ultricies, dignissim ante a, ornare ipsum.
-                            Phasellus suscipit rhoncus nulla, quis bibendum tortor elementum ac. Nullam viverra
-                            tellus diam, nec accumsan orci aliquam sed. Sed placerat sagittis lacus, non rutrum diam
-                            volutpat id. </p>
+    <!-- About Me Section Begin -->
+    <section class="about-me spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="about-left">
+                        <img src="{{ asset('user/img/about-me.jpg') }}" alt="">
+                        <div class="about-title">
+                            {{-- <span>16 January 2019</span> --}}
+                            <h2>I’m I Ketut Wiyasa, <br />a Senior and Head Cook Kitchen</h2>
+                            <p>Education.<br />
+                                July 1998 - sept 1999 PPLP panshopia collage.<br />
+                                Major. D1 food& baverage division.<br />
+                                Course of study. An introduction to language, basic hotel,(frontoffice,f&B,
+                                accounting)<br />
+                            </p>
+                            <p>Experience :<br />
+                                10 years in Hotel</p>
+                            <ul>
+                                <li>Job training at KIND OF VILLA BINTANG in Nusa dua, Bali</li>
+                                <li>As a cook at Grand Mirage Resort and Spa</li>
+                                <li>As a senior cook at TAO restauran in Ramada Tanjung Benoa hotel</li>
+                                <li>As a leader kitchen at GRAND Surya Hotel Eksekutif Bar and Karaoke</li>
+                                <li>As a Head cook at la Lorraine Restaurant</li>
+                                <li>As a Head cook at Baturiti Resto Lovina</li>
+                                <li>As a Demi chef at De Boutique Style Hotel</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="about-right">
+                        <div class="sidebar">
+                            @foreach ($recipes as $value)
+                                <div class="sidebar-item">
+                                    <a href="{{ route('homepage.show', $value->id) }}"><img
+                                            src="{{ $value->photo->getUrl() }}" alt="" width="100px"
+                                            height="80px"></a>
+                                    <div class="sidebar-item-text">
+                                        <div class="cat-name">{{ ucfirst($value->kategori) }}</div>
+                                        <h6><a href="{{ route('homepage.show', $value->id) }}" style="text-decoration: none; color:inherit ">{{ $value->nameFood }}</a></h6>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="about-right">
-                    <div class="sidebar">
-                        <div class="sidebar-item">
-                            <a href="#"><img src="img/cat-feature/small-1.jpg" alt=""></a>
-                            <div class="sidebar-item-text">
-                                <div class="cat-name">Vegan</div>
-                                <h6>One Pot Weeknight Lasagna Soup Recipe</h6>
-                            </div>
-                        </div>
-                        <div class="sidebar-item">
-                            <a href="#"><img src="img/cat-feature/small-2.jpg" alt=""></a>
-                            <div class="sidebar-item-text">
-                                <div class="cat-name">Vegan</div>
-                                <h6>Lava Cake with a Tone of Chocolate</h6>
-                            </div>
-                        </div>
-                        <div class="sidebar-item">
-                            <a href="#"><img src="img/cat-feature/small-3.jpg" alt=""></a>
-                            <div class="sidebar-item-text">
-                                <div class="cat-name">Vegan</div>
-                                <h6>One Pot Weeknight Lasagna Soup Recipe</h6>
-                            </div>
-                        </div>
-                        <div class="sidebar-item">
-                            <a href="#"><img src="img/cat-feature/small-4.jpg" alt=""></a>
-                            <div class="sidebar-item-text">
-                                <div class="cat-name">Vegan</div>
-                                <h6>Smoked Salmon mini Sandwiches with Onion</h6>
-                            </div>
-                        </div>
-                        <div class="sidebar-item">
-                            <a href="#"><img src="img/cat-feature/small-5.jpg" alt=""></a>
-                            <div class="sidebar-item-text">
-                                <div class="cat-name">Vegan</div>
-                                <h6>Asparagus with Pork Loin and Vegetables</h6>
-                            </div>
-                        </div>
-                        <div class="sidebar-item">
-                            <a href="#"><img src="img/cat-feature/small-6.jpg" alt=""></a>
-                            <div class="sidebar-item-text">
-                                <div class="cat-name">Vegan</div>
-                                <h6>Dry Cookies with Corn</h6>
-                            </div>
-                        </div>
-                        <div class="sidebar-item">
-                            <a href="#"><img src="img/cat-feature/small-7.jpg" alt=""></a>
-                            <div class="sidebar-item-text">
-                                <div class="cat-name">Vegan</div>
-                                <h6>Italian Tiramisu with Coffe</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-right-add set-bg" data-setbg="img/about-right.jpg">
-                        <h4>Buy my Cook Book</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- About Me Section End -->
+    </section>
+    <!-- About Me Section End -->
 
-<!-- Similar Recipe Section Begin -->
-<section class="similar-recipe spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="similar-item">
-                    <a href="#"><img src="img/cat-feature/small-7.jpg" alt=""></a>
-                    <div class="similar-text">
-                        <div class="cat-name">Vegan</div>
-                        <h6>Italian Tiramisu with Coffe</h6>
+    <!-- Similar Recipe Section Begin -->
+    {{-- <section class="similar-recipe spad">
+        <div class="container">
+            <div class="row">
+                @foreach ($recipes as $value)
+                <div class="col-lg-3 col-md-6">
+                    <div class="similar-item">
+                        <a href="{{ route('homepage.show', $value->id) }}"><img src="{{ $value->photo->getUrl() }}" alt="" width="75px" height="100px"></a>
+                        <div class="similar-text">
+                            <div class="cat-name">Indonesian Food</div>
+                            <h6>{{ $value->nameFood }}</h6>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="similar-item">
-                    <a href="#"><img src="img/cat-feature/small-6.jpg" alt=""></a>
-                    <div class="similar-text">
-                        <div class="cat-name">Vegan</div>
-                        <h6>Dry Cookies with Corn</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="similar-item">
-                    <a href="#"><img src="img/cat-feature/small-5.jpg" alt=""></a>
-                    <div class="similar-text">
-                        <div class="cat-name">Vegan</div>
-                        <h6>Asparagus with Pork Loin and Vegetables</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="similar-item">
-                    <a href="#"><img src="img/cat-feature/small-4.jpg" alt=""></a>
-                    <div class="similar-text">
-                        <div class="cat-name">Vegan</div>
-                        <h6>Smoked Salmon mini Sandwiches with Onion</h6>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
-</section>
-<!-- Similar Recipe Section End -->
+    </section> --}}
+    <!-- Similar Recipe Section End -->
 @endsection

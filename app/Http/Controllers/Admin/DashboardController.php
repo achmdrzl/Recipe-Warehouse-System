@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Recipe;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,22 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.index', ['title' => 'Homepage']);
+        $user = User::count('id');
+        $recipe = Recipe::count('id');
+        $startRecipe = Recipe::orderBy('id', 'ASC')->first();
+        $endRecipe = Recipe::orderBy('id', 'DESC')->first();
+        $startUser = User::orderBy('id', 'ASC')->first();
+        $endUser = User::orderBy('id', 'DESC')->first();
+
+        return view('admin.index', [
+            'title' => 'Homepage',
+            'totalRecipe' => $recipe,
+            'totalUser' => $user,
+            'startRecipe' => $startRecipe,
+            'endRecipe' => $endRecipe,
+            'startUser' => $startUser,
+            'endUser' => $endUser 
+        ]);
     }
 
     /**
