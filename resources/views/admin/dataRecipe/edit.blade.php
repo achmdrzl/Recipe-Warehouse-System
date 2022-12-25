@@ -9,11 +9,11 @@
 
 @section('content')
     <div class="page-header">
-        <h3 class="page-title">Tambah Resep Makanan</h3>
+        <h3 class="page-title">Edit Resep Makanan</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('recipes.index') }}">Data Resep</a></li>
-                <li class="breadcrumb-item active" aria-current="page"> Tambah Resep Makanan</li>
+                <li class="breadcrumb-item active" aria-current="page"> Edit Resep Makanan</li>
             </ol>
         </nav>
     </div>
@@ -33,7 +33,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Menambahkan Data Resep Makanan Baru</h4>
+                    <h4 class="card-title">Mengubah Data Resep Makanan</h4>
                     <p class="card-description">Harap Masukkan Seluruh Inputan Dengan Benar!</p>
                     <form class="forms-sample" action="{{ route('recipes.update', $recipe->id) }}" method="POST">
                         @csrf
@@ -103,9 +103,10 @@
                                     <div class="col-md-10">
                                         <div class="form-group">
                                             <label>Masukkan Langkah-Langkah Memasak</label>
-                                            <input type="text" id="instruction" class="form-control"
+                                            <Textarea name="instruction[]" id="instruction" class="form-control" placeholder="Masukkan Langkah-Langkah Memasak">{{ $value->instruction }}</Textarea>
+                                            {{-- <input type="text" id="instruction" class="form-control"
                                                 name="instruction[]" placeholder="Masukkan Langkah-Langkah Memasak"
-                                                value="{{ $value->instruction }}" />
+                                                value="{{ $value->instruction }}" /> --}}
                                         </div>
                                     </div>
                                 @endforeach
@@ -147,8 +148,7 @@
                 `<div class="row">
                         <div class="col-md-10">
                             <div class="form-group">
-                                <input type="text" id="instruction" class="form-control" name="instruction[]"
-                                    placeholder="Masukkan Langkah-Langkah Memasak" required />
+                                <Textarea name="instruction[]" id="instruction" class="form-control" placeholder="Masukkan Langkah-Langkah Memasak"></Textarea>
                             </div>
                         </div>
                         <div class="col-md-2">

@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 grid-margin stretch-card">
+        <div class="col-lg-6 grid-margin stretch-card" style="height:500px;width:120px;overflow:auto;">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Bahan-Bahan Yang di Butuhkan</h4>
@@ -107,7 +107,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 grid-margin stretch-card">
+        <div class="col-lg-6 grid-margin stretch-card mdi-responsive " style="height:500px;width:120px;overflow:auto;">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Instruksi Cara Memasak</h4>

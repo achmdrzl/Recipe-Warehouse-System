@@ -131,5 +131,4 @@ class DataIngredientController extends Controller
 
         return response()->json(['status' => 'Data Bahan Makanan Berhasil di Hapus!']);
     }
-
 }

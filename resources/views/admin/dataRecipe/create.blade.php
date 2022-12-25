@@ -53,7 +53,7 @@
                                 placeholder="Masukkan Waktu Pembuatan Makanan" value="{{ old('cookTime') }}" />
                         </div>
                         <div class="form-group">
-                            <label for="prepTime">Waktu Persiapan</label>
+                            <label for="prepTime">Waktu Persiapan (dalam menit)</label>
                             <input type="number" class="form-control" id="prepTime" name="prepTime"
                                 placeholder="Masukkan Waktu Persiapan" />
                         </div>
@@ -85,8 +85,8 @@
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         <label>Masukkan Langkah-Langkah Memasak</label>
-                                        <input type="text" id="instruction" class="form-control" name="instruction[]"
-                                            placeholder="Masukkan Langkah-Langkah Memasak" required />
+                                        <Textarea name="instruction[]" id="instruction" class="form-control" placeholder="Masukkan Langkah-Langkah Memasak"></Textarea>
+                                        {{-- <input type="text" id="instruction" class="form-control" name="instruction[]" placeholder="Masukkan Langkah-Langkah Memasak" required /> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -127,8 +127,7 @@
                 `<div class="row">
                         <div class="col-md-10">
                             <div class="form-group">
-                                <input type="text" id="instruction" class="form-control" name="instruction[]"
-                                    placeholder="Masukkan Langkah-Langkah Memasak" required />
+                                <Textarea name="instruction[]" id="instruction" class="form-control" placeholder="Masukkan Langkah-Langkah Memasak"></Textarea>
                             </div>
                         </div>
                         <div class="col-md-2">

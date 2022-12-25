@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('instructions', function (Blueprint $table) {
             $table->id();
-            $table->string('instruction');
+            $table->text('instruction');
             $table->foreignId('recipe_id');
             $table->timestamps();
         });

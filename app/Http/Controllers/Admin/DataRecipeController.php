@@ -103,10 +103,9 @@ class DataRecipeController extends Controller
         }
 
         return redirect()->route('recipes.index')->with([
-                'message' => 'Penambahan Data Resep Makanan Berhasil!',
-                'type' => 'success'
-            ]);
-
+            'message' => 'Penambahan Data Resep Makanan Berhasil!',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -134,7 +133,6 @@ class DataRecipeController extends Controller
         $recipe = Recipe::with(['detailRecipe.ingredient'])->where('id', $id)->first();
         $ingredients = Ingredient::all()->pluck('item', 'id');
         return view('admin.dataRecipe.edit', compact('recipe', 'ingredients'));
-
     }
 
     /**
@@ -202,10 +200,9 @@ class DataRecipeController extends Controller
         }
 
         return redirect()->route('recipes.index')->with([
-                'message' => 'Mengubah Data Resep Makanan Berhasil!',
-                'type' => 'success'
-            ]);
-
+            'message' => 'Mengubah Data Resep Makanan Berhasil!',
+            'type' => 'success'
+        ]);
     }
 
     /**
@@ -217,8 +214,8 @@ class DataRecipeController extends Controller
     public function destroy($id)
     {
         Recipe::find($id)->delete();
-        Instruction::where('id_recipe', $id)->delete();
-        Detail_recipe::where('id_recipe', $id)->delete();
+        Instruction::where('recipe_id', $id)->delete();
+        Detail_recipe::where('recipe_id', $id)->delete();
 
         return response()->json(['status' => 'Data Resep Makanan Berhasil di Hapus!']);
     }

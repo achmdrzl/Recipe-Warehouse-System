@@ -1,5 +1,8 @@
 @extends('admin.layout.main')
-
+@push('style-alt')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@endpush
 @section('content')
     <div class="content-wrapper">
         @if (session()->has('message'))
@@ -41,8 +44,9 @@
                                             <input type="hidden" class="delete_id" value="{{ $value->id }}">
                                             <td><label class="badge badge-dark">{{ $loop->iteration }}</label></td>
                                             <td>{{ $value->nameFood }}</td>
-                                            <td>{{ substr($value->desc, 0,30) }} ...</td>
-                                            <td><label class="badge badge-danger">{{ ucfirst($value->kategori) }}</label></td>
+                                            <td>{{ substr($value->desc, 0, 30) }} ...</td>
+                                            <td><label class="badge badge-danger">{{ ucfirst($value->kategori) }}</label>
+                                            </td>
                                             <td>
                                                 @if ($value->photo)
                                                     <a href="{{ $value->photo->getUrl() }}" target="_blank">
@@ -54,15 +58,16 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('recipes.show', $value->id) }}"
-                                                    class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
+                                                <a href="{{ route('recipes.show', $value->id) }}" class="btn btn-info"><i
+                                                        class="fa fa-eye"></i> Detail</a>
                                                 <a href="{{ route('recipes.edit', $value->id) }}"
                                                     class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
                                                 <form action="{{ route('recipes.destroy', $value->id) }}" method="POST"
                                                     class="d-inline">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-danger btn-md btndelete"><i class="ti-trash"></i>
+                                                    <button type="submit" class="btn btn-danger btn-md btndelete"><i
+                                                            class="ti-trash"></i>
                                                         <i class="fa fa-trash-o"></i> Delete</button>
                                                 </form>
                                             </td>
@@ -79,6 +84,9 @@
 @endsection
 
 @push('script-alt')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <script>
         $(document).ready(function() {
 
@@ -129,4 +137,53 @@
 
         });
     </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('.btndelete').click(function(e) {
+                e.preventDefault();
+
+                var deleteid = $(this).closest("tr").find('.delete_id').val();
+
+                swal({
+                        title: "Apakah anda yakin?",
+                        text: "Setelah dihapus, Anda tidak dapat memulihkan Data ini lagi!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            var data = {
+                                "_token": $('input[name=_token]').val(),
+                                'id': deleteid,
+                            };
+                            $.ajax({
+                                type: "DELETE",
+                                url: 'recipes/' + deleteid,
+                                data: data,
+                                success: function(response) {
+                                    swal(response.status, {
+                                            icon: "success",
+                                        })
+                                        .then((result) => {
+                                            location.reload();
+                                        });
+                                }
+                            });
+                        } else {
+                            swal("Batal!", "Proses Hapus di Batalkan!", "error");
+                        }
+                    });
+            });
+
+        });
+    </script> --}}
 @endpush
