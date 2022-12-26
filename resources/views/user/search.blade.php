@@ -23,7 +23,7 @@
                                 <a href="{{ route('homepage.show', $value->id) }}">
                                     <h4>{{ $value->nameFood }}</h4>
                                 </a>
-                                <p style="text-align: justify">{{ substr($value->desc, 0, 140) }} ...</p>
+                                <p style="text-align: justify">{{ substr($value->desc, 0, 30) }} ...</p>
                             </div>
                         </div>
                     </div>

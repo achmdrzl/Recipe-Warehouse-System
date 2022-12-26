@@ -53,7 +53,8 @@
                                                     class="d-inline">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit" class="btn btn-danger btn-sm btndelete"><i class="ti-trash"></i>
+                                                    <button type="submit" class="btn btn-danger btn-sm btndelete"><i
+                                                            class="ti-trash"></i>
                                                         <i class="fa fa-trash-o"></i> Delete</button>
                                                 </form>
                                             </td>
@@ -151,7 +152,8 @@
                                             style="font-weight: bold">Items</span>
                                         <input type="text" id="item" class="form-control" name="item"
                                             value="" placeholder="Masukkan Nama Item" required />
-                                        <input type="hidden" class="item_id" value="" id="item_id" name="item_id">
+                                        <input type="hidden" class="item_id" value="" id="item_id"
+                                            name="item_id">
                                     </div>
                                 </div>
                             </div>

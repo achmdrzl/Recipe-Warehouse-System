@@ -44,6 +44,7 @@ Route::group(['middleware' => ['role:user', 'auth']], function () {
         return view('user.contact', ['title' => 'Contact']);
     })->name('contactme');
 
+    Route::get('/searchPanel', SearchController::class . '@index')->name('search.panel');
     Route::post('/search', SearchController::class . '@search')->name('search.recipe');
 
 });

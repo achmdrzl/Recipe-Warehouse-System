@@ -18,7 +18,8 @@ class HomepageController extends Controller
     public function index()
     {
         $recipes = Recipe::paginate(6);
-        return view('user.index', ['title' => 'Home', 'recipes' => $recipes]);
+        $ingredients = Ingredient::all();
+        return view('user.index', ['title' => 'Home', 'recipes' => $recipes, 'ingredients' => $ingredients]);
     }
 
     /**
@@ -95,5 +96,4 @@ class HomepageController extends Controller
     {
         //
     }
-
 }
